@@ -9,6 +9,7 @@ namespace Shop.Rewards.Store
 
     public sealed class Store : IStore
     {
+        private readonly static int DefaultPageSize = 10;
         private readonly string connectionString;
 
         public Store(string connectionString)
@@ -31,31 +32,35 @@ namespace Shop.Rewards.Store
             await cmd.ExecuteNonQueryAsync();
         }
 
-        public async Task<IEnumerable<PurchaseRecord>> GetAllPurchases(int pageNumber)
+        public async Task<PurchaseRecordCollection> GetAllPurchases(int pageNumber)
         {
             var purchases = new List<PurchaseRecord>();
+            int totalCount = 0;
 
             using var conn = new SqlConnection(this.connectionString);
             using var cmd = new SqlCommand("usp_GetAllPurchases", conn);
             cmd.CommandType = CommandType.StoredProcedure;
+
+            cmd.Parameters.AddWithValue("@PageNumber", pageNumber);
+            cmd.Parameters.AddWithValue("@PageSize", DefaultPageSize);
 
             await conn.OpenAsync();
             using var reader = await cmd.ExecuteReaderAsync();
 
             while (await reader.ReadAsync())
             {
-                purchases.Add(new PurchaseRecord
-                {
-                    Id = reader.GetGuid(reader.GetOrdinal("Id")),
-                    StoreName = reader.GetString(reader.GetOrdinal("StoreName")),
-                    Category = Enum.Parse<Category>(reader.GetString(reader.GetOrdinal("Category"))),
-                    Amount = reader.GetDecimal(reader.GetOrdinal("Amount")),
-                    CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                    UserId = reader.GetGuid(reader.GetOrdinal("UserId"))
-                });
+                purchases.Add(this.ReadPurchaseRecordFromReader(reader));
             }
 
-            return purchases;
+            if (await reader.NextResultAsync())
+            {
+                if (await reader.ReadAsync())
+                {
+                    totalCount = reader.GetInt32(reader.GetOrdinal("TotalCount"));
+                }
+            }
+
+            return new PurchaseRecordCollection(purchases, totalCount, ++pageNumber);
         }
 
         public async Task<PurchaseRecord> GetPurchaseById(Guid id)
@@ -74,18 +79,10 @@ namespace Shop.Rewards.Store
 
             await reader.ReadAsync();
 
-            return new PurchaseRecord
-            {
-                Id = reader.GetGuid(reader.GetOrdinal("Id")),
-                StoreName = reader.GetString(reader.GetOrdinal("StoreName")),
-                Category = Enum.Parse<Category>(reader.GetString(reader.GetOrdinal("Category"))),
-                Amount = reader.GetDecimal(reader.GetOrdinal("Amount")),
-                CreatedAt = reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                UserId = reader.GetGuid(reader.GetOrdinal("UserId"))
-            };
+            return this.ReadPurchaseRecordFromReader(reader);
         }
 
-        public async Task<bool> DeletePurchase(int id)
+        public async Task<bool> DeletePurchase(Guid id)
         {
             using var conn = new SqlConnection(this.connectionString);
             using var cmd = new SqlCommand("usp_DeletePurchase", conn);
@@ -114,6 +111,12 @@ namespace Shop.Rewards.Store
             var rowsAffected = await cmd.ExecuteNonQueryAsync();
 
             return rowsAffected > 0;
+        }
+
+        private PurchaseRecord ReadPurchaseRecordFromReader(SqlDataReader reader)
+        {
+            return new PurchaseRecord(reader.GetGuid(reader.GetOrdinal("Id")), reader.GetGuid(reader.GetOrdinal("UserId")), reader.GetString(reader.GetOrdinal("StoreName")),
+                         Enum.Parse<Category>(reader.GetString(reader.GetOrdinal("Category"))), reader.GetDecimal(reader.GetOrdinal("Amount")), reader.GetDateTime(reader.GetOrdinal("CreatedAt")));
         }
     }
 }

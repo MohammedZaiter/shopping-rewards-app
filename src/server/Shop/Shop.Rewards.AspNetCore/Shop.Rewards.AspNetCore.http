@@ -1,6 +1,0 @@
-@Shop.Rewards.AspNetCore_HostAddress = http://localhost:5043
-
-GET {{Shop.Rewards.AspNetCore_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

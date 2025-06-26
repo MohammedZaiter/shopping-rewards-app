@@ -2,7 +2,6 @@
 namespace Shop.Rewards.Store
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
     public interface IStore
@@ -11,10 +10,10 @@ namespace Shop.Rewards.Store
 
         Task<PurchaseRecord> GetPurchaseById(Guid id);
 
-        Task<IEnumerable<PurchaseRecord>> GetAllPurchases(int pageNumber);
+        Task<PurchaseRecordCollection> GetAllPurchases(int pageNumber);
 
         Task<bool> UpdatePurchase(Guid id, PurchaseRecord purchase);
 
-        Task<bool> DeletePurchase(int id);
+        Task<bool> DeletePurchase(Guid id);
     }
 }
