@@ -7,7 +7,7 @@ namespace Shop.Rewards.Store
     using System.Data;
     using System.Threading.Tasks;
 
-    public sealed class Store : IStore
+    public sealed partial class Store : IStore
     {
         private readonly static int DefaultPageSize = 10;
         private readonly string connectionString;

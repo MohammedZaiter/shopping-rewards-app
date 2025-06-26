@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Abstractions", "src\Shop.Rewards.Abstractions\Shop.Rewards.Abstractions.csproj", "{2D60AA05-09F1-4451-B2B8-546C4C33276A}"
 EndProject
@@ -24,6 +24,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Identity.Abstractions", "Shop.Rewards.Identity.Abstractions\Shop.Rewards.Identity.Abstractions.csproj", "{A63A9BC4-92DF-43D5-8F12-EB00060BAC75}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Identity.AspNetCore", "Shop.Rewards.Identity.AspNetCore\Shop.Rewards.Identity.AspNetCore.csproj", "{16C60777-F37E-4B0B-AEE2-FFA9982CD73F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Search", "Shop.Rewards.Search\Shop.Rewards.Search.csproj", "{B7A703AC-3EB2-43DD-AB33-F1D12DC94F8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Common", "Shop.Rewards.Common\Shop.Rewards.Common.csproj", "{794B9BFF-5CC8-48D8-AF1B-C66AC256A96B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Rewards.Search.Abstractions", "Shop.Rewards.Search.Abstractions\Shop.Rewards.Search.Abstractions.csproj", "{BC1FE8DB-0209-467D-8918-CE040A295E30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -67,6 +73,18 @@ Global
 		{16C60777-F37E-4B0B-AEE2-FFA9982CD73F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16C60777-F37E-4B0B-AEE2-FFA9982CD73F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16C60777-F37E-4B0B-AEE2-FFA9982CD73F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A703AC-3EB2-43DD-AB33-F1D12DC94F8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A703AC-3EB2-43DD-AB33-F1D12DC94F8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A703AC-3EB2-43DD-AB33-F1D12DC94F8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A703AC-3EB2-43DD-AB33-F1D12DC94F8A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{794B9BFF-5CC8-48D8-AF1B-C66AC256A96B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{794B9BFF-5CC8-48D8-AF1B-C66AC256A96B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{794B9BFF-5CC8-48D8-AF1B-C66AC256A96B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{794B9BFF-5CC8-48D8-AF1B-C66AC256A96B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC1FE8DB-0209-467D-8918-CE040A295E30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC1FE8DB-0209-467D-8918-CE040A295E30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC1FE8DB-0209-467D-8918-CE040A295E30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC1FE8DB-0209-467D-8918-CE040A295E30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

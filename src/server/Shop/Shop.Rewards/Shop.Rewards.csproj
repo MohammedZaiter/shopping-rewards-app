@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Shop.Rewards.Search\Shop.Rewards.Search.csproj" />
     <ProjectReference Include="..\Shop.Rewards.Store.Abstracttions\Shop.Rewards.Store.Abstracttions.csproj" />
     <ProjectReference Include="..\src\Shop.Rewards.Abstractions\Shop.Rewards.Abstractions.csproj" />
   </ItemGroup>

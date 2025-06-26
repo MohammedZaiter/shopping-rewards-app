@@ -4,7 +4,7 @@ namespace Shop.Rewards.Common
     using System.Collections;
     using System.Collections.Generic;
 
-    public class Collection<T> : IEnumerable<T>
+    public class Collection<T> : IEnumerable<T>, ICollection
     {
         protected readonly List<T> items = new List<T>();
 
